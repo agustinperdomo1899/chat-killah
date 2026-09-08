@@ -9,7 +9,7 @@
 <body>
 
   <div class="card">
-    <!-- Logotipo estilo IA / Red Neuronal en tono violeta -->
+    <!-- Logotipo estilo IA -->
     <div class="logo-container">
       <svg class="ai-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="45" stroke="url(#violet-grad)" stroke-width="3" />
@@ -30,13 +30,72 @@
     </div>
 
     <h1>Asistente IA</h1>
-    <p>Hola, soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy?</p>
+    <p id="desc">Hola, soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy?</p>
     
-    <div class="links">
-      <a href="#" class="btn btn-primary">Iniciar Chat</a>
-      <a href="#" class="btn btn-secondary">Probar Funciones</a>
+    <!-- Botón inicial -->
+    <div id="main-actions" class="links">
+      <button onclick="mostrarChat()" class="btn btn-primary">Iniciar Chat</button>
+    </div>
+
+    <!-- Caja de Chat (Oculta al inicio) -->
+    <div id="chat-box" class="chat-container" style="display: none;">
+      <div id="chat-messages" class="chat-messages">
+        <div class="message bot">¡Hola! Soy tu IA. ¿Qué quieres preguntarme?</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="user-input" placeholder="Escribe un mensaje..." onkeypress="evaluarEnter(event)">
+        <button onclick="enviarMensaje()" class="btn-send">➔</button>
+      </div>
     </div>
   </div>
+
+  <script>
+    function mostrarChat() {
+      document.getElementById("main-actions").style.display = "none";
+      document.getElementById("desc").style.display = "none";
+      document.getElementById("chat-box").style.display = "flex";
+    }
+
+    function enviarMensaje() {
+      const input = document.getElementById("user-input");
+      const texto = input.value.trim();
+      if (!texto) return;
+
+      const chatMessages = document.getElementById("chat-messages");
+
+      // Mostrar mensaje del usuario
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.innerText = texto;
+      chatMessages.appendChild(userMsg);
+
+      input.value = "";
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Respuesta automática de la IA
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.className = "message bot";
+        
+        // Respuestas predeterminadas
+        const txt = texto.toLowerCase();
+        if (txt.includes("hola")) {
+          botMsg.innerText = "¡Hola! ¿Cómo estás? ¿En qué te puedo ayudar?";
+        } else if (txt.includes("quien sos") || txt.includes("quién eres")) {
+          botMsg.innerText = "Soy una IA asistente personalizada y creada en GitHub Pages.";
+        } else {
+          botMsg.innerText = "Entendido. Estoy procesando tu consulta...";
+        }
+
+        chatMessages.appendChild(botMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 800);
+    }
+
+    function evaluarEnter(e) {
+      if (e.key === 'Enter') enviarMensaje();
+    }
+  </script>
 
 </body>
 </html>
