@@ -1,1 +1,104 @@
+/* Estilos globales y fondo degradado violeta profundo */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top left, #2e1065, #0f0728, #030014);
+  color: #f3e8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
 
+/* Tarjeta principal estilo cristal con borde brillante */
+.card {
+  background: rgba(30, 11, 60, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 40px 30px;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(112, 26, 222, 0.25);
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+/* Contenedor y efectos del Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ai-logo {
+  width: 90px;
+  height: 90px;
+  filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.6));
+  animation: pulse 3s infinite ease-in-out;
+}
+
+/* Animación sutil de respiración para la IA */
+@keyframes pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(232, 121, 249, 0.8)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)); }
+}
+
+/* Títulos y párrafos */
+h1 {
+  font-size: 1.9rem;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #f5d0fe, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+p {
+  color: #d8b4fe;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+/* Botones en tonos Violeta y Neón */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn {
+  display: block;
+  padding: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #c084fc, #9333ea);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(168, 85, 247, 0.1);
+  color: #e9d5ff;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.btn-secondary:hover {
+  background: rgba(168, 85, 247, 0.25);
+  border-color: #c084fc;
+  transform: translateY(-2px);
+}
