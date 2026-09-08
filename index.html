@@ -3,19 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Página Web</title>
+  <title>Mi IA - Asistente Virtual</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="card">
-    <img src="https://picsum.photos/150" alt="Foto de perfil" class="profile-img">
-    <h1>¡Hola! Bienvenido a mi página</h1>
-    <p>Este es un sitio web rápido, moderno y 100% gratuito alojado en GitHub Pages.</p>
+    <!-- Logotipo estilo IA / Red Neuronal en tono violeta -->
+    <div class="logo-container">
+      <svg class="ai-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" stroke="url(#violet-grad)" stroke-width="3" />
+        <circle cx="50" cy="25" r="7" fill="#c084fc" />
+        <circle cx="28" cy="60" r="7" fill="#a855f7" />
+        <circle cx="72" cy="60" r="7" fill="#8b5cf6" />
+        <line x1="50" y1="25" x2="28" y2="60" stroke="#a855f7" stroke-width="2" />
+        <line x1="50" y1="25" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
+        <line x1="28" y1="60" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
+        <circle cx="50" cy="48" r="10" fill="#e879f9" class="core-node" />
+        <defs>
+          <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e879f9" />
+            <stop offset="100%" stop-color="#6b21a8" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <h1>Asistente IA</h1>
+    <p>Hola, soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy?</p>
     
     <div class="links">
-      <a href="https://google.com" target="_blank" class="btn">Mi Proyecto</a>
-      <a href="#" class="btn btn-secondary">Contacto</a>
+      <a href="#" class="btn btn-primary">Iniciar Chat</a>
+      <a href="#" class="btn btn-secondary">Probar Funciones</a>
     </div>
   </div>
 
