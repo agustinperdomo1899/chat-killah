@@ -3,93 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi IA - Asistente Virtual</title>
+  <title>Asistente IA - WhatsApp Violeta</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="card">
-    <!-- Logotipo estilo IA -->
-    <div class="logo-container">
-      <svg class="ai-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="45" stroke="url(#violet-grad)" stroke-width="3" />
-        <circle cx="50" cy="25" r="7" fill="#c084fc" />
-        <circle cx="28" cy="60" r="7" fill="#a855f7" />
-        <circle cx="72" cy="60" r="7" fill="#8b5cf6" />
-        <line x1="50" y1="25" x2="28" y2="60" stroke="#a855f7" stroke-width="2" />
-        <line x1="50" y1="25" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
-        <line x1="28" y1="60" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
-        <circle cx="50" cy="48" r="10" fill="#e879f9" class="core-node" />
-        <defs>
-          <linearGradient id="violet-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#e879f9" />
-            <stop offset="100%" stop-color="#6b21a8" />
-          </linearGradient>
-        </defs>
-      </svg>
+  <div class="chat-card">
+    <!-- Cabecera estilo WhatsApp -->
+    <div class="chat-header">
+      <div class="avatar-container">
+        <svg class="ai-avatar" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="#c084fc" stroke-width="4" />
+          <circle cx="50" cy="25" r="7" fill="#e879f9" />
+          <circle cx="28" cy="60" r="7" fill="#a855f7" />
+          <circle cx="72" cy="60" r="7" fill="#8b5cf6" />
+          <line x1="50" y1="25" x2="28" y2="60" stroke="#a855f7" stroke-width="2" />
+          <line x1="50" y1="25" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
+          <line x1="28" y1="60" x2="72" y2="60" stroke="#a855f7" stroke-width="2" />
+          <circle cx="50" cy="48" r="10" fill="#e879f9" />
+        </svg>
+      </div>
+      <div class="header-info">
+        <h2>Asistente IA</h2>
+        <span class="status">en línea</span>
+      </div>
     </div>
 
-    <h1>Asistente IA</h1>
-    <p id="desc">Hola, soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy?</p>
-    
-    <!-- Botón inicial -->
-    <div id="main-actions" class="links">
-      <button onclick="mostrarChat()" class="btn btn-primary">Iniciar Chat</button>
+    <!-- Área de Conversación -->
+    <div class="chat-body" id="chat-body">
+      <!-- Mensaje de la IA (Izquierda) -->
+      <div class="message-wrapper bot">
+        <div class="bubble">
+          Hola, soy tu asistente virtual inteligente. ¿En qué puedo ayudarte hoy?
+          <span class="time">18:36</span>
+        </div>
+      </div>
+
+      <!-- Mensajes del Usuario (Derecha) -->
+      <div class="message-wrapper user">
+        <div class="bubble">
+          ¡Claro! He actualizado el diseño para que tenga este estilo de chat.
+          <span class="time">18:55 <span class="check">✓✓</span></span>
+        </div>
+      </div>
+
+      <div class="message-wrapper user">
+        <div class="bubble">
+          Todas las descripciones y funcionalidades anteriores se mantienen. ¿Por dónde empezamos?
+          <span class="time">18:50 <span class="check">✓✓</span></span>
+        </div>
+      </div>
+
+      <!-- Botones de Acción dentro del Chat -->
+      <div class="action-buttons">
+        <button class="chat-btn btn-filled" onclick="enviarOpcion('Iniciar Chat')">Iniciar Chat</button>
+        <button class="chat-btn btn-outline" onclick="enviarOpcion('Probar Funciones')">Probar Funciones</button>
+        <button class="chat-btn btn-outline" onclick="enviarOpcion('Documentación')">Documentación</button>
+      </div>
     </div>
 
-    <!-- Caja de Chat (Oculta al inicio) -->
-    <div id="chat-box" class="chat-container" style="display: none;">
-      <div id="chat-messages" class="chat-messages">
-        <div class="message bot">¡Hola! Soy tu IA. ¿Qué quieres preguntarme?</div>
+    <!-- Barra de Entrada Inferior estilo WhatsApp -->
+    <div class="chat-footer">
+      <div class="input-container">
+        <input type="text" id="chat-input" placeholder="Escribe un mensaje..." onkeypress="evaluarEnter(event)">
+        <button class="icon-btn">📎</button>
+        <button class="icon-btn">🎙️</button>
       </div>
-      <div class="chat-input-area">
-        <input type="text" id="user-input" placeholder="Escribe un mensaje..." onkeypress="evaluarEnter(event)">
-        <button onclick="enviarMensaje()" class="btn-send">➔</button>
-      </div>
+      <button class="send-btn" onclick="enviarMensaje()">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
     </div>
   </div>
 
   <script>
-    function mostrarChat() {
-      document.getElementById("main-actions").style.display = "none";
-      document.getElementById("desc").style.display = "none";
-      document.getElementById("chat-box").style.display = "flex";
+    function obtenerHoraActual() {
+      const ahora = new Date();
+      const horas = ahora.getHours().toString().padStart(2, '0');
+      const minutos = ahora.getMinutes().toString().padStart(2, '0');
+      return `${horas}:${minutos}`;
     }
 
     function enviarMensaje() {
-      const input = document.getElementById("user-input");
+      const input = document.getElementById("chat-input");
       const texto = input.value.trim();
       if (!texto) return;
 
-      const chatMessages = document.getElementById("chat-messages");
-
-      // Mostrar mensaje del usuario
-      const userMsg = document.createElement("div");
-      userMsg.className = "message user";
-      userMsg.innerText = texto;
-      chatMessages.appendChild(userMsg);
-
+      agregarMensajeUsuario(texto);
       input.value = "";
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
+      
       // Respuesta automática de la IA
       setTimeout(() => {
-        const botMsg = document.createElement("div");
-        botMsg.className = "message bot";
-        
-        // Respuestas predeterminadas
-        const txt = texto.toLowerCase();
-        if (txt.includes("hola")) {
-          botMsg.innerText = "¡Hola! ¿Cómo estás? ¿En qué te puedo ayudar?";
-        } else if (txt.includes("quien sos") || txt.includes("quién eres")) {
-          botMsg.innerText = "Soy una IA asistente personalizada y creada en GitHub Pages.";
-        } else {
-          botMsg.innerText = "Entendido. Estoy procesando tu consulta...";
-        }
+        responderIA(texto);
+      }, 1000);
+    }
 
-        chatMessages.appendChild(botMsg);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 800);
+    function enviarOpcion(texto) {
+      agregarMensajeUsuario(texto);
+      setTimeout(() => {
+        responderIA(texto);
+      }, 1000);
+    }
+
+    function agregarMensajeUsuario(texto) {
+      const chatBody = document.getElementById("chat-body");
+      const wrapper = document.createElement("div");
+      wrapper.className = "message-wrapper user";
+      wrapper.innerHTML = `
+        <div class="bubble">
+          ${texto}
+          <span class="time">${obtenerHoraActual()} <span class="check">✓✓</span></span>
+        </div>
+      `;
+      chatBody.appendChild(wrapper);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function responderIA(consulta) {
+      const chatBody = document.getElementById("chat-body");
+      const wrapper = document.createElement("div");
+      wrapper.className = "message-wrapper bot";
+
+      let respuesta = "Entendido. Estoy procesando tu consulta...";
+      const txt = consulta.toLowerCase();
+
+      if (txt.includes("iniciar chat")) {
+        respuesta = "¡Chat iniciado! Puedes escribirme lo que quieras.";
+      } else if (txt.includes("probar funciones")) {
+        respuesta = "Puedo responder preguntas, darte información sobre código o guiarte en tus proyectos.";
+      } else if (txt.includes("documentación")) {
+        respuesta = "Toda la documentación está desplegada correctamente en GitHub Pages.";
+      } else if (txt.includes("hola")) {
+        respuesta = "¡Hola! ¿Cómo estás? ¿En qué te puedo ayudar hoy?";
+      }
+
+      wrapper.innerHTML = `
+        <div class="bubble">
+          ${respuesta}
+          <span class="time">${obtenerHoraActual()}</span>
+        </div>
+      `;
+      chatBody.appendChild(wrapper);
+      chatBody.scrollTop = chatBody.scrollHeight;
     }
 
     function evaluarEnter(e) {
